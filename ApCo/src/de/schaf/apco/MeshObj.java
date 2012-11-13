@@ -42,7 +42,7 @@ import org.newdawn.slick.opengl.Texture;
 import de.schaf.apco.util.Buffer;
 import de.schaf.apco.util.ShaderHandler;
 
-public class MeshObj extends Entity {
+public class MeshObj {
     public List<Vector3f> vertices = new ArrayList<Vector3f>();
     public List<Vector3f> normals = new ArrayList<Vector3f>();
     public List<Vector3f> tangents = new ArrayList<Vector3f>();
