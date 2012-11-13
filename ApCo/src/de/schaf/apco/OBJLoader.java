@@ -65,6 +65,7 @@ public class OBJLoader {
                 Vector3f textureIndices = new Vector3f(textureIndex[0], textureIndex[1], textureIndex[2]);
 
                 Face face = new Face(vertexIndices, textureIndices, normalIndices);
+
                 m.faces.add(face);
             }
         }

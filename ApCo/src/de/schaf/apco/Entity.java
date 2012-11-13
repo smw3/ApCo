@@ -7,7 +7,7 @@ import org.newdawn.slick.opengl.Texture;
 public class Entity {
 	private Vector3f Position = new Vector3f();
 
-	private Texture Texture = null;
+	protected Texture Texture = null;
 
 	public Entity() {
 

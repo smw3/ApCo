@@ -12,10 +12,13 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
+import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.opengl.TextureLoader;
 
 public class Game {
 
+	public static Game Instance; // for lazy bums
+	
 	public static final int RENDER_WIDTH = 1024;
 	public static final int RENDER_HEIGHT = 768;
 
@@ -28,8 +31,11 @@ public class Game {
 
 	private ArrayList<Entity> Entities = new ArrayList<Entity>();
 	private Entity BackgroundSprite = null;
+	private TestPlane TPlane;
 
 	public void start() throws LWJGLException {
+		Instance = this;
+		
 		init();
 		initGL();
 		// initTextures();
@@ -73,6 +79,9 @@ public class Game {
 			System.exit(1);
 		}
 		//
+		TPlane = new TestPlane();
+		TPlane.setPosition(new Vector3f(400f,300f,0f));
+		addObject(TPlane);
 	}
 
 	public void updateFPS() {
@@ -96,6 +105,7 @@ public class Game {
 
 	private void logic(long delta) {
 		// float delta_mod = (float) delta / 1000;
+		MouseControls.Do();
 
 	}
 
@@ -150,6 +160,10 @@ public class Game {
 
 	public static void main(String[] args) throws Exception {
 		(new Game()).start();
+	}
+
+	public void doSomethingWithAPick(float x, float y, float z) {
+		TPlane.setPosition(new Vector3f(x,y,z));		
 	}
 
 }
