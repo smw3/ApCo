@@ -29,7 +29,7 @@ public class Camera {
 		
 		float dist = (float) Math.sqrt(1 / 3.0f);
 		
-		gluLookAt(dist, dist, dist,
+		gluLookAt(Focus.x+dist, Focus.y+dist, Focus.z+dist,
 				Focus.x, Focus.y, Focus.z,
 				0f, 0f, -1f);
 
@@ -48,5 +48,23 @@ public class Camera {
 	public static void setFocus(float x, float y) {
 		Focus.x = x;
 		Focus.y = y;
+	}
+	
+	public static float getX() {
+		float dist = (float) Math.sqrt(1 / 3.0f);
+		
+		return Focus.x+dist;	
+	}
+	
+	public static float getY() {
+		float dist = (float) Math.sqrt(1 / 3.0f);
+		
+		return Focus.y+dist;	
+	}
+	
+	public static float getZ() {
+		float dist = (float) Math.sqrt(1 / 3.0f);
+		
+		return Focus.z+dist;	
 	}
 }
