@@ -44,6 +44,7 @@ public class Entity {
 		GL11.glPushMatrix();
 		{
 			GL11.glTranslatef(-.5f, -.5f, 0f);
+			GL11.glScalef(getTexture().getImageWidth(),getTexture().getImageHeight(),1f);
 			GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
 			{
 				GL11.glNormal3f(0f, 0f, 1f);
