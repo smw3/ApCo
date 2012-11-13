@@ -23,7 +23,7 @@ public class ShaderHandler {
 
     public enum Shader {
 
-        PPL("ppl.vert","ppl.frag"), BUMP("ppl.vert","ppl.frag"), STANDARD("shader.vert","shader.frag");
+        STANDARD("shader.vert","shader.frag");
         public int ProgramHandle;
         public int vertexShaderHandle;
         public int fragmentShaderHandle;
@@ -41,7 +41,7 @@ public class ShaderHandler {
                 BufferedReader reader = new BufferedReader(
                         new InputStreamReader(
                         new BufferedInputStream((new Object() {
-                }).getClass().getClassLoader().getResourceAsStream(".\\res\\shader\\" + VertShaderLocation))));
+                }).getClass().getClassLoader().getResourceAsStream("de\\schaf\\apco\\media\\" + VertShaderLocation))));
                 String line;
                 while ((line = reader.readLine()) != null) {
                     vertexShaderSource.append(line).append('\n');
@@ -56,7 +56,7 @@ public class ShaderHandler {
                 BufferedReader reader = new BufferedReader(
                         new InputStreamReader(
                         new BufferedInputStream((new Object() {
-                }).getClass().getClassLoader().getResourceAsStream(".\\res\\shader\\" + FragShaderLocation))));
+                }).getClass().getClassLoader().getResourceAsStream("de\\schaf\\apco\\media\\" + FragShaderLocation))));
                 String line;
                 while ((line = reader.readLine()) != null) {
                     fragmentShaderSource.append(line).append('\n');

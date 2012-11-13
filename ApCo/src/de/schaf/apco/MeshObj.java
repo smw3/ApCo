@@ -208,7 +208,7 @@ public class MeshObj extends Entity {
     public void render() {
         //glPushMatrix();
 
-        int Shader = ShaderHandler.Shader.PPL.ProgramHandle;
+        int Shader = ShaderHandler.Shader.STANDARD.ProgramHandle;
         //int Shader = -1;
         //if (Shader != -1) glUseProgram(Shader);
 
@@ -233,13 +233,13 @@ public class MeshObj extends Entity {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
         
-        // Relay tangent information to shader (if nessecary). I THINK it works.
-        if (Shader == ShaderHandler.Shader.BUMP.ProgramHandle) {
+        // Relay tangent information to shader (if nessecary). I THINK it doesn't work at all.
+        /*if (Shader == ShaderHandler.Shader.BUMP.ProgramHandle) {
             int TangentIndex = glGetAttribLocation(Shader, "tangent");     
 
             glBindBuffer(GL_ARRAY_BUFFER, vboTangentHandle);
             glVertexAttribPointer(TangentIndex, 4, GL_FLOAT, false, 0, 0L);
-        }
+        }*/
         
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboIndexHandle);
 
