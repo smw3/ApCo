@@ -20,4 +20,14 @@ public class Camera {
 				Focus.x, Focus.y, Focus.z,
 				0f, 1f, 0f);
 	}
+	
+	public static void Move(float dx, float dy) {
+		Focus.x += dx;
+		Focus.y += dy;
+	}
+	
+	public static void setFocus(float x, float y) {
+		Focus.x = x;
+		Focus.y = y;
+	}
 }
