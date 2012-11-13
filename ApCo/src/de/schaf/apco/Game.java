@@ -3,12 +3,16 @@ package de.schaf.apco;
 import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.opengl.GL11.glOrtho;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
+import org.newdawn.slick.opengl.TextureLoader;
 
 public class Game {
 
@@ -21,6 +25,9 @@ public class Game {
 	private long lastFPS;
 	private int fps;
 	long delta;
+
+	private ArrayList<Entity> Entities = new ArrayList<Entity>();
+	private Entity BackgroundSprite = null;
 
 	public void start() throws LWJGLException {
 		init();
@@ -53,6 +60,19 @@ public class Game {
 			System.exit(0);
 		}
 		Mouse.create();
+		
+		// Initialize Backgroundsprite
+		BackgroundSprite = new Entity();
+		try {
+			BackgroundSprite.setTexture(TextureLoader.getTexture(
+					"PNG",
+					this.getClass().getResourceAsStream(
+							"/de/schaf/apco/media/eddc_debugedit.png")));
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+		//
 	}
 
 	public void updateFPS() {
@@ -79,6 +99,10 @@ public class Game {
 
 	}
 
+	public void addObject(Entity E) {
+		Entities.add(E);
+	}
+
 	/* Graphics stuff */
 
 	private void initGL() {
@@ -89,24 +113,26 @@ public class Game {
 
 	private void render() {
 		Camera.init();
-
-		GL11.glMatrixMode(GL11.GL_MODELVIEW);
-		GL11.glLoadIdentity();
-
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		
-		GL11.glPushMatrix();
-		{
-			drawObjects();
+		try {
+			BackgroundSprite.Render();
+		} catch (CorruptTextureException e1) {
+			e1.printStackTrace();
 		}
-		GL11.glPopMatrix();
+		
+		Camera.initISO();		
+
+		try {
+			drawObjects();
+		} catch (CorruptTextureException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private void drawObjects() {
-		//
+	private void drawObjects() throws CorruptTextureException {
+		for (Entity E : Entities) {
+			E.Render();
+		}
 
 	}
 
