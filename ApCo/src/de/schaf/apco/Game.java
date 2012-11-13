@@ -44,7 +44,7 @@ public class Game {
 	}
 
 	public void init() throws LWJGLException {
-		Display.setTitle("Space!");
+		Display.setTitle("ApCo!!");
 		try {
 			Display.setDisplayMode(new DisplayMode(800, 600));
 			Display.create();
