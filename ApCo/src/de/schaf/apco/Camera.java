@@ -12,13 +12,13 @@ public class Camera {
 	public static void init() {
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		glOrtho(0, Game.RENDER_WIDTH, Game.RENDER_HEIGHT, 0, 10, -10);
+		glOrtho(-Game.RENDER_WIDTH / 2, Game.RENDER_WIDTH / 2, Game.RENDER_HEIGHT / 2, -Game.RENDER_HEIGHT / 2, 10000, -10000);
 		
 		float dist = (float) Math.sqrt(1 / 3.0f);
 		
 		gluLookAt(dist, dist, dist,
 				Focus.x, Focus.y, Focus.z,
-				0f, 1f, 0f);
+				0f, 0f, -1f);
 	}
 	
 	public static void Move(float dx, float dy) {
