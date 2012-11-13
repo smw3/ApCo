@@ -13,7 +13,7 @@ public class Camera {
 	public static void init() {
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		glOrtho(-Game.RENDER_WIDTH / 2, Game.RENDER_WIDTH / 2, Game.RENDER_HEIGHT / 2, -Game.RENDER_HEIGHT / 2, 10000, -10000);
+		glOrtho(0, Game.RENDER_WIDTH, Game.RENDER_HEIGHT, 0, 10000, -10000);
 
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glLoadIdentity();
@@ -25,7 +25,7 @@ public class Camera {
 	public static void initISO() {
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		glOrtho(-Game.RENDER_WIDTH / 2, Game.RENDER_WIDTH / 2, Game.RENDER_HEIGHT / 2, -Game.RENDER_HEIGHT / 2, 10000, -10000);
+		glOrtho(0, Game.RENDER_WIDTH, Game.RENDER_HEIGHT, 0, 10000, -10000);
 		
 		float dist = (float) Math.sqrt(1 / 3.0f);
 		
