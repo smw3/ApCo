@@ -38,9 +38,10 @@ public class Entity {
 			Texture.bind();
 			doQuad();
 		}
+		GL11.glPopMatrix();
 	}
 
-	private void doQuad() {
+	protected void doQuad() {
 		GL11.glPushMatrix();
 		{
 			GL11.glTranslatef(-.5f, -.5f, 0f);
@@ -55,13 +56,14 @@ public class Entity {
 				GL11.glTexCoord2f(0, getTexture().getHeight());
 				GL11.glVertex2f(0, 1);
 
+				GL11.glTexCoord2f(getTexture().getWidth(), 0);
+				GL11.glVertex2f(1, 0);
+				
 				GL11.glTexCoord2f(getTexture().getWidth(), getTexture()
 						.getHeight());
-				GL11.glVertex2f(1, 0);
-
-				GL11.glTexCoord2f(getTexture().getWidth(), 0);
 				GL11.glVertex2f(1, 1);
 			}
+			GL11.glEnd();
 		}
 		GL11.glPopMatrix();
 	}
