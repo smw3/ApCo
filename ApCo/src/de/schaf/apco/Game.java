@@ -73,7 +73,7 @@ public class Game {
 			BackgroundSprite.setTexture(TextureLoader.getTexture(
 					"PNG",
 					this.getClass().getResourceAsStream(
-							"/de/schaf/apco/media/eddc_debugedit.png")));
+							"/de/schaf/apco/media/grid.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -122,7 +122,7 @@ public class Game {
 	}
 
 	private void render() {
-		Camera.init();
+		Camera.initISO();
 		
 		try {
 			BackgroundSprite.Render();

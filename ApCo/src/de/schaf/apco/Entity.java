@@ -44,24 +44,23 @@ public class Entity {
 	protected void doQuad() {
 		GL11.glPushMatrix();
 		{
-			
 			GL11.glScalef(getTexture().getImageWidth(),getTexture().getImageHeight(),1f);
 			GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
 			{
 				GL11.glNormal3f(0f, 0f, 1f);
 
 				GL11.glTexCoord2f(0, 0);
-				GL11.glVertex2f(0, 0);
+				GL11.glVertex2f(-.5f, -.5f);
 
 				GL11.glTexCoord2f(0, getTexture().getHeight());
-				GL11.glVertex2f(0, 1);
+				GL11.glVertex2f(-.5f, 1f-.5f);
 
 				GL11.glTexCoord2f(getTexture().getWidth(), 0);
-				GL11.glVertex2f(1, 0);
+				GL11.glVertex2f(1f-.5f, -.5f);
 				
 				GL11.glTexCoord2f(getTexture().getWidth(), getTexture()
 						.getHeight());
-				GL11.glVertex2f(1, 1);
+				GL11.glVertex2f(1f-.5f, 1f-.5f);
 			}
 			GL11.glEnd();
 		}
