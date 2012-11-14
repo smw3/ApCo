@@ -18,7 +18,7 @@ public class Camera {
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glLoadIdentity();
 
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		//GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 	
@@ -29,14 +29,19 @@ public class Camera {
 		
 		float dist = (float) Math.sqrt(1 / 3.0f);
 		
-		gluLookAt(dist, dist, dist,
+		float overhead_angle = getOverheadAngle();
+		float ground_angle = getGroundAngle();
+		
+		float height = (float) Math.sin(overhead_angle);
+		
+		gluLookAt(dist, dist, height,
 				0f, 0f, 0f,				
 				dist, dist, 0f);
 
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glLoadIdentity();
 
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		//GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 	
@@ -66,5 +71,13 @@ public class Camera {
 		float dist = (float) Math.sqrt(1 / 3.0f);
 		
 		return Focus.z+dist;	
+	}
+
+	public static float getGroundAngle() {
+		return (float) Math.toRadians(45);
+	}
+
+	public static float getOverheadAngle() {
+		return (float) Math.toRadians(30);
 	}
 }

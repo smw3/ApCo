@@ -273,7 +273,7 @@ public class MeshObj {
     private void drawFaceNormals() {
         glDisable(GL_TEXTURE_2D);
         GL11.glPushMatrix();
-        GL11.glScalef(0.5f,0.5f,0.5f);
+        GL11.glScalef(0.05f,0.05f,0.05f);
         for (Face face : faces) {
             Vector3f FaceCenter = face.getCenter();
             Vector3f FaceNormal = face.getFaceNormal();

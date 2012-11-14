@@ -11,7 +11,6 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 import org.lwjgl.util.vector.Vector3f;
 
-
 public class MouseControls {
 	private static boolean clicked = false;
 	private static Point dragStart = null;
@@ -28,9 +27,10 @@ public class MouseControls {
 		}
 
 		if (Mouse.isButtonDown(0)) {
+			click();
 			if (!clicked) {
 				clicked = true;
-				click();
+				// click();
 			}
 		} else {
 			clicked = false;
@@ -54,38 +54,34 @@ public class MouseControls {
 	}
 
 	public static void Pick() {
-		FloatBuffer position = getMousePosition(Mouse.getX(), Mouse.getY());
-		System.out.println("Picked: "+position.get(0)+"  "+position.get(1)+"  "+0f);
-		Game.Instance.doSomethingWithAPick(position.get(0), position.get(1),0f);
+		Vector3f position = getWorldPosition(Mouse.getX(), Mouse.getY());
+		System.out.println("Picked: " + position.x + "  " + position.y + "  "
+				+ position.z +" for Mouse "+Mouse.getX()+" "+Mouse.getY());
+		Game.Instance.TPlane.setPosition(MouseControls.getWorldPosition(Mouse.getX(), Mouse.getY()));
 	}
 
-	static public FloatBuffer getMousePosition(int mouseX, int mouseY) {
-		// TODO: fix this
-		Camera.initISO();
-		IntBuffer viewport = BufferUtils.createIntBuffer(16);
-		FloatBuffer modelview = BufferUtils.createFloatBuffer(16);
-		FloatBuffer projection = BufferUtils.createFloatBuffer(16);
-		FloatBuffer winZ = BufferUtils.createFloatBuffer(1);
-		float winX, winY;
-		FloatBuffer position = BufferUtils.createFloatBuffer(3);
-		GL11.glGetFloat(GL11.GL_MODELVIEW_MATRIX, modelview);
-		GL11.glGetFloat(GL11.GL_PROJECTION_MATRIX, projection);
-		GL11.glGetInteger(GL11.GL_VIEWPORT, viewport);
-		winX = (float) mouseX;
-		// winY = (float) viewport.get(3) - (float) mouseY;
-		winY = (float) mouseY;
-		GL11.glReadPixels(mouseX, (int) winY, 1, 1, GL11.GL_DEPTH_COMPONENT,
-				GL11.GL_FLOAT, winZ);
-		//GLU.gluUnProject(winX, winY, winZ.get(), modelview, projection,
-		//		viewport, position);
-		float winz_out = .5f;
-		System.out.println(winz_out);
-		GLU.gluUnProject(winX, winY, winz_out, modelview, projection,
-				viewport, position);
-		return position;
-	}
-	// If you get a DirectBuffer exception when reading the position from the
-	// FloatBuffer, just use position.get(0) for X, position.get(1) for Y and
-	// position.get(2) for Z. Enjoy!
+	static public Vector3f getWorldPosition(int mouseX, int mouseY) {
+		Vector3f P = new Vector3f();
+		// Vector3f homogenized_pos = m_MatrixProjection * WorldPosition;
+		int InputOffsetX = mouseX - Game.RENDER_WIDTH / 2;
+		int InputOffsetY = mouseY - Game.RENDER_HEIGHT / 2;
+		int InputOffsetZ = 0;
 
+		float overhead_angle = Camera.getOverheadAngle();
+		float ground_angle = Camera.getGroundAngle();
+		
+		float vertical_scale = (float) Math.sin(Math.toRadians(30)); // TODO find out what the hell I have to do to get it accurate
+				
+		float out_x_rotate = -(float) (-Math.sin(ground_angle)*InputOffsetX + Math.cos(ground_angle)*(InputOffsetY/vertical_scale));
+		float out_y_rotate = -(float) (Math.cos(ground_angle)*InputOffsetX + Math.sin(ground_angle)*(InputOffsetY/vertical_scale));
+		
+		float out_x = out_x_rotate;
+		float out_y = out_y_rotate;
+		
+		P.x = out_x;
+		P.y = out_y;
+		P.z = 0f;
+		
+		return P;
+	}
 }

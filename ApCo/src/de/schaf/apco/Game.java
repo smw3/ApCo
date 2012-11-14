@@ -31,7 +31,8 @@ public class Game {
 
 	private ArrayList<Entity> Entities = new ArrayList<Entity>();
 	private Entity BackgroundSprite = null;
-	private TestPlane TPlane;
+	
+	public TestPlane TPlane;
 
 	public void start() throws LWJGLException {
 		Instance = this;
@@ -59,7 +60,7 @@ public class Game {
 	public void init() throws LWJGLException {
 		Display.setTitle("ApCo!!");
 		try {
-			Display.setDisplayMode(new DisplayMode(800, 600));
+			Display.setDisplayMode(new DisplayMode(RENDER_WIDTH, RENDER_HEIGHT));
 			Display.create();
 		} catch (LWJGLException e) {
 			e.printStackTrace();
@@ -106,7 +107,6 @@ public class Game {
 	private void logic(long delta) {
 		// float delta_mod = (float) delta / 1000;
 		MouseControls.Do();
-
 	}
 
 	public void addObject(Entity E) {
@@ -161,9 +161,4 @@ public class Game {
 	public static void main(String[] args) throws Exception {
 		(new Game()).start();
 	}
-
-	public void doSomethingWithAPick(float x, float y, float z) {
-		TPlane.setPosition(new Vector3f(x,y,z));		
-	}
-
 }
