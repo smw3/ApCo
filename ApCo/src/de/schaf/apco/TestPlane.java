@@ -11,7 +11,7 @@ public class TestPlane extends Entity3D {
 	
 	public TestPlane() {
 		try {
-			if (Model == null) Model = OBJLoader.loadModel("de/schaf/apco/media/Poseidon.obj");
+			if (Model == null) Model = OBJLoader.loadModel("de/schaf/apco/media/A380.obj");
 			setModel(Model);
 
 			// TODO do this properly

@@ -63,8 +63,8 @@ public class MouseControls {
 	static public Vector3f getWorldPosition(int mouseX, int mouseY) {
 		Vector3f P = new Vector3f();
 		// Vector3f homogenized_pos = m_MatrixProjection * WorldPosition;
-		int InputOffsetX = mouseX - Game.RENDER_WIDTH / 2;
-		int InputOffsetY = mouseY - Game.RENDER_HEIGHT / 2;
+		int InputOffsetX = (int) (Camera.getX() + mouseX - Game.RENDER_WIDTH / 2);
+		int InputOffsetY = (int) (Camera.getY() + mouseY - Game.RENDER_HEIGHT / 2);
 		int InputOffsetZ = 0;
 
 		float overhead_angle = Camera.getOverheadAngle();

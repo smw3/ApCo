@@ -15,7 +15,7 @@ public class Entity3D extends Entity {
 		GL11.glPushMatrix();
 		{
 			GL11.glTranslatef(getPosition().x,getPosition().y,0f);
-			GL11.glScalef(5f, 5f, 5f);
+			GL11.glScalef(1f, 1f, 1f);
 			Model.setActiveTexture(Texture);
 			Model.render();
 		}
